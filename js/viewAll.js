@@ -8,7 +8,7 @@ chrome.storage.sync.get(['search_results'], function(result) {
     for(let query in result.search_results) {
         if(result.search_results.hasOwnProperty(query)) {
             results.append('<li><a href="' + chrome.runtime.getURL('allResults.html') + '?searchQuery=' + query + 
-                '>' + query + '</a></li>');
+                '">' + query + '</a></li>');
         }
     }
 });
