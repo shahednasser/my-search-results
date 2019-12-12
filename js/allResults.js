@@ -4,6 +4,7 @@ if(!searchQuery) {
     window.location.href = chrome.runtime.getURL('popup.html')
 }
 const resultsList = $("#results");
+$("#searchQuery").text(searchQuery);
 chrome.storage.sync.get(['search_results'], function(result) {
     if(!result.search_results || !result.search_results.hasOwnProperty(searchQuery)) {
         window.location.href = chrome.runtime.getURL('popup.html')
