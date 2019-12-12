@@ -9,7 +9,7 @@ chrome.runtime.sendMessage({}, function (searchQuery) {
         $("input[name=search_result_title]").val(tabs[0].title);
     });
 
-    updateList(searchQuery);
+    window.updateList(searchQuery, true, false);
 });
 
 const formContainer = $("#form");
@@ -43,32 +43,7 @@ $("#saveSearchResult").on('click', function () {
         chrome.storage.sync.set({search_results}, function () {
             formContainer.before('<div class="alert alert-success">Search Result has been saved!</div>');
             self.prop('disabled', false);
-            updateList(searchQuery);
+            window.updateList(searchQuery, true, false);
         });
     });
 });
-
-const resultsContainer = $("#resultsContainer"),
-      resultsList = resultsContainer.find('.results');
-function updateList(searchQuery) {
-    resultsList.children().remove();
-    chrome.storage.sync.get(['search_results'], function(result) {
-        if(result.search_results && result.search_results.hasOwnProperty(searchQuery)) {
-            const searchResults = result.search_results[searchQuery],
-                  limit = Math.min(3, searchResults.length);
-            for(let i = 0; i < limit; i++) {
-                resultsList.append('<li><a href="' + searchResults[i].url + '" target="_blank">' +
-                    (searchResults[i].title ? searchResults[i].title : searchResults[i].url) + '</a>' + 
-                    (searchResults[i].title ? '' : '<br><small class="text-gray">' + searchResults[i].url + 
-                    '</small>') + '</li>');
-            }
-            if(searchResults.length > 3) {
-                resultsContainer.append('<a href="' + chrome.runtime.getURL('allResults.html') + '?searchQuery=' + 
-                    searchQuery + '">Show more</a>');
-            }
-            resultsContainer.removeClass('d-none');
-        } else {
-            resultsContainer.addClass('d-none');
-        }
-    });
-}
