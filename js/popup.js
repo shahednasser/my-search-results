@@ -9,7 +9,7 @@ chrome.runtime.sendMessage({}, function (searchQuery) {
         $("input[name=search_result_title]").val(tabs[0].title);
     });
 
-    updateList();
+    updateList(searchQuery);
 });
 
 const formContainer = $("#form");
@@ -35,14 +35,14 @@ $("#saveSearchResult").on('click', function () {
         chrome.storage.sync.set({search_results}, function () {
             formContainer.before('<div class="alert alert-success">Search Result has been saved!</div>');
             self.prop('disabled', false);
-            updateList();
+            updateList(searchQuery);
         });
     });
 });
 
 const resultsContainer = $("#resultsContainer"),
       resultsList = resultsContainer.find('.results');
-function updateList() {
+function updateList(searchQuery) {
     resultsList.children().remove();
     chrome.storage.sync.get(['search_results'], function(result) {
         if(result.search_results && result.search_results.hasOwnProperty(searchQuery)) {
