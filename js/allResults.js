@@ -3,7 +3,6 @@ const urlObj = new URL(location.href),
 if(!searchQuery) {
     window.location.href = chrome.runtime.getURL('popup.html')
 }
-const resultsList = $("#results");
 $("#searchQuery").text(searchQuery);
 window.updateList(searchQuery, false, true);
 $("#saveSearchResult").on('click', function () {
