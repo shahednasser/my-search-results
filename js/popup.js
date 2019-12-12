@@ -15,6 +15,9 @@ $("#saveSearchResult").on('click', function () {
     self.prop('disabled', true);
     chrome.storage.sync.get(['search_results'], function (result) {
         const search_results = result.search_results;
+        if(!search_results) {
+            search_results = {};
+        }
         if(!search_results.hasOwnProperty(searchQuery)) {
             search_results[searchQuery] = [];
         }
