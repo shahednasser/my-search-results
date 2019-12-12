@@ -16,6 +16,10 @@ chrome.runtime.sendMessage({}, function (searchQuery) {
             for(let i = 0; i < limit; i++) {
                 resultsList.append('<li>' + searchResults[i] + '</li>');
             }
+            if(searchResults.length > 3) {
+                resultsContainer.append('<a href="' + chrome.runtime.getURL('allResults.html') + '?searchQuery=' + 
+                    searchQuery + '">Show more</a>');
+            }
         } else {
             resultsContainer.remove();
         }
