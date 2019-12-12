@@ -23,9 +23,11 @@ $("#saveSearchResult").on('click', function () {
     }
     if(!searchQuery.length) {
         formContainer.before('<div class="alert alert-danger">Search Query is required.</div>');
+        return;
     }
     if(!searchResult.length) {
         formContainer.before('<div class="alert alert-danger">Search Result URL is required.</div>');
+        return;
     }
     self.prop('disabled', true);
     chrome.storage.sync.get(['search_results'], function (result) {
