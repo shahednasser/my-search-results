@@ -18,12 +18,10 @@ chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
 });
 
 chrome.runtime.onInstalled.addListener(function (details) {
-    console.log("installed");
     chrome.tabs.query({}, function(tabs) {
         for(let i = 0; i < tabs.length; i++) {
             checkForSearchQuery(tabs[i].id, tabs[i].url);
         }
-        console.log(searchTabs)
     });
 });
 
