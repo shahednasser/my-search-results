@@ -10,7 +10,7 @@ chrome.webRequest.onCompleted.addListener(function (details) {
         }
         console.log(searchQuery, searchTabs);
     }
-}, {urls: ["https://www.google.com/search"]}, []);
+}, {urls: ["*://google.com/search"]}, []);
 
 chrome.runtime.onMessage.addListener(function (request, sender, callback) {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
