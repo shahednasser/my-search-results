@@ -1,10 +1,24 @@
-chrome.runtime.sendMessage({}, function (response) {
-    if(response) {
-        $("input[name=search_query]").val(response);
+chrome.runtime.sendMessage({}, function (searchQuery) {
+    if(searchQuery) {
+        $("input[name=search_query]").val(searchQuery);
     }
 
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         $("input[name=search_result]").val(tabs[0].url);
+    });
+
+    chrome.storage.sync.get(['search_results'], function(result) {
+        const resultsContainer = $("#resultsContainer");
+        if(result.search_results && result.search_results.hasOwnProperty(searchQuery)) {
+            const resultsList = resultsContainer.find('.results'),
+                  searchResults = result.search_results[searchQuery],
+                  limit = Math.min(3, searchResults.length);
+            for(let i = 0; i < limit; i++) {
+                resultsList.append('<li>' + searchResults[i] + '</li>');
+            }
+        } else {
+            resultsContainer.remove();
+        }
     });
 });
 
