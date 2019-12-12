@@ -1,3 +1,4 @@
+chrome.storage.sync.clear();
 chrome.runtime.sendMessage({}, function (searchQuery) {
     if(searchQuery) {
         $("input[name=search_query]").val(searchQuery);
