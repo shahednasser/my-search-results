@@ -11,7 +11,7 @@ chrome.runtime.sendMessage({}, function (response) {
 $("#saveSearchResult").on('click', function () {
     const searchQuery = $("input[name=search_query]").val(),
           searchResult = $("input[name=search_result]").val();
-    const self = $(this);
+    let self = $(this);
     self.prop('disabled', true);
     chrome.storage.sync.get(['search_results'], function (result) {
         const search_results = result.search_results;
