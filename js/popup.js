@@ -1,4 +1,5 @@
 chrome.runtime.sendMessage({}, function (response) {
+    console.log("response", response);
     if(response) {
         $("input[name=search_result]").val(response);
     }
