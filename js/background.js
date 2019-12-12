@@ -20,6 +20,7 @@ chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
 chrome.runtime.onInstalled.addListener(function (details) {
     console.log("installed");
     chrome.tabs.query({}, function(tabs) {
+        console.log(tabs)
         for(let i = 0; i < tabs.length; i++) {
             checkForSearchQuery(tabs[i].tabId, tabs[i].url);
         }
