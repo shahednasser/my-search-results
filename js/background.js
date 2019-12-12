@@ -10,5 +10,6 @@ chrome.webRequest.onCompleted.addListener(function (details) {
 }, {urls: ["*://*.google.com/"]}, []);
 
 chrome.runtime.onMessage.addListener(function (request, sender, callback) {
+    console.log(sender, request);
     return callback(searchTabs[sender.tab.id]);
 });
