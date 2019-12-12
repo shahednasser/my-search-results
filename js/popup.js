@@ -57,8 +57,9 @@ function updateList(searchQuery) {
                 resultsContainer.append('<a href="' + chrome.runtime.getURL('allResults.html') + '?searchQuery=' + 
                     searchQuery + '">Show more</a>');
             }
+            resultsContainer.removeClass('d-none');
         } else {
-            resultsContainer.remove();
+            resultsContainer.addClass('d-none');
         }
     });
 }
