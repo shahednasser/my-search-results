@@ -7,7 +7,7 @@ chrome.webRequest.onCompleted.addListener(function (details) {
             searchTabs[details.tabId] = searchQuery;
         }
     }
-}, {urls: ["*://*.google.com.*/"]}, ['asyncBlocking']);
+}, {urls: ["*://*.google.com.*/"]}, []);
 
 chrome.runtime.onMessage.addListener(function (request, sender, callback) {
     return callback(searchTabs[sender.tab.id]);
