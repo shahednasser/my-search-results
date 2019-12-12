@@ -10,12 +10,12 @@ chrome.webRequest.onCompleted.addListener(function (details) {
         }
         console.log(searchQuery, searchTabs);
     }
-}, {urls: ["<all_urls>"]}, []);
+}, {urls: ["*://google.com/*"]}, []);
 
 chrome.runtime.onMessage.addListener(function (request, sender, callback) {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         console.log(tabs[0], searchTabs);
-        return callback(searchTabs[tabs[0].id]);
+        callback(searchTabs[tabs[0].id]);
     });
     return true;  // Will respond asynchronously.
 });
