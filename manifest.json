@@ -6,7 +6,7 @@
          "storage",
          "tabs",
          "webRequest",
-         "*://*.google.com/"
+         "*://google.com/*"
  ],
  "browser_action": {
     "default_popup": "popup.html"
