@@ -14,14 +14,20 @@ chrome.runtime.sendMessage({}, function (searchQuery) {
 const formContainer = $("#form");
 
 $("#saveSearchResult").on('click', function () {
-    const searchQuery = $("input[name=search_query]").val(),
-          searchResult = $("input[name=search_result_url]").val(),
-          searchResultTitle = $("input[name=search_result_title]").val(),
+    const searchQuery = $("input[name=search_query]").val() ? $("input[name=search_query]").val().trim() : '',
+          searchResult = $("input[name=search_result_url]").val() ? $("input[name=search_result_url]").val().trim() : '',
+          searchResultTitle = $("input[name=search_result_title]").val() ? $("input[name=search_result_title]").val().trim() : '',
           self = $(this);
-    self.prop('disabled', true);
     if(formContainer.prev('alert').length) {
         formContainer.prev('alert').remove();
     }
+    if(!searchQuery.length) {
+        formContainer.before('<div class="alert alert-danger">Search Query is required.</div>');
+    }
+    if(!searchResult.length) {
+        formContainer.before('<div class="alert alert-danger">Search Result URL is required.</div>');
+    }
+    self.prop('disabled', true);
     chrome.storage.sync.get(['search_results'], function (result) {
         let search_results = result.search_results;
         if(!search_results) {
