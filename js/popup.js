@@ -8,11 +8,16 @@ chrome.runtime.sendMessage({}, function (response) {
     });
 });
 
+const formContainer = $("#form");
+
 $("#saveSearchResult").on('click', function () {
     const searchQuery = $("input[name=search_query]").val(),
           searchResult = $("input[name=search_result]").val(),
           self = $(this);
     self.prop('disabled', true);
+    if(formContainer.prev('alert').length) {
+        formContainer.prev('alert').remove();
+    }
     chrome.storage.sync.get(['search_results'], function (result) {
         let search_results = result.search_results;
         if(!search_results) {
@@ -23,7 +28,7 @@ $("#saveSearchResult").on('click', function () {
         }
         search_results[searchQuery].push(searchResult);
         chrome.storage.sync.set({search_results}, function () {
-            console.log("success");
+            formContainer.before('<div class="alert alert-success">Search Result has been saved!</div>');
             self.prop('disabled', false);
         });
     });
