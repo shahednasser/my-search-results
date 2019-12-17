@@ -50,7 +50,9 @@ function checkForSearchQuery(tabId, url) {
             searchTabs[tabId] = searchQuery;
         }
     } else {
-        chrome.pageAction.hide(tabId);
+        if(chrome.pageAction) {
+            chrome.pageAction.hide(tabId);
+        }
     }
 }
 
