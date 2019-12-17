@@ -8,18 +8,18 @@
          "webRequest",
          "*://*.google.com/*"
  ],
-  "background": {
-    "scripts": ["js/background.js"],
-    "persistent": true
-  },
-  "page_action": {
-    "default_icon": {                    
+ "browser_action": {
+     "default_icon": {                    
         "16": "images/16x16.png",           
         "24": "images/24x24.png",           
         "32": "images/32x32.png"            
     },
-    "default_title": "Dolphin",      
-    "default_popup": "popup.html"        
+    "default_title": "Dolphin", 
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["js/background.js"],
+    "persistent": true
   },
  "manifest_version": 2
 }

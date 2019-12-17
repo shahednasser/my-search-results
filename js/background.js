@@ -30,7 +30,7 @@ function checkForSearchQuery(tabId, url) {
     if(urlObj.href.indexOf('google.com') !== -1 && urlObj.pathname.indexOf('/search') !== -1) {
         const searchQuery = urlObj.searchParams.get('q');
         chrome.pageAction.show(tabId);
-        if(searchQuery) {
+        if(se/rchQuery) {
             //check if search query is similar to saved search queries
             chrome.storage.sync.get(['search_results'], function(result) {
                 if(result.search_results) {
