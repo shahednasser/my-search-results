@@ -37,14 +37,14 @@ function checkForSearchQuery(tabId, url) {
                     const similarQuery = checkSimilarQueries(result.search_results, searchQuery);
                     if(similarQuery) {
                         //chrome.browserAction.setBadgeText({text: result.search_results[searchQuery].length, tabId});
-                        chrome.pageAction.setTitle({tabId: tabId, text: 'You have similar saved search results!'});
+                        chrome.pageAction.setTitle({tabId, title: 'You have similar saved search results!'});
                     } else {
                         //chrome.browserAction.setBadgeText({text: '', tabId});
-                        chrome.pageAction.setTitle({tabId: tabId, text: ''});
+                        chrome.pageAction.setTitle({tabId, title: ''});
                     }
                 } else {
                     //chrome.browserAction.setBadgeText({text: '', tabId});
-                    chrome.pageAction.setTitle({tabId: tabId, text: ''});
+                    chrome.pageAction.setTitle({tabId, title: ''});
                 }
             });
             searchTabs[tabId] = searchQuery;
