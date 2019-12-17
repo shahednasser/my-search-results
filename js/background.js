@@ -29,29 +29,24 @@ function checkForSearchQuery(tabId, url) {
     const urlObj = new URL(url)
     if(urlObj.href.indexOf('google.com') !== -1 && urlObj.pathname.indexOf('/search') !== -1) {
         const searchQuery = urlObj.searchParams.get('q');
-        chrome.pageAction.show(tabId);
-        if(se/rchQuery) {
+        if(searchQuery) {
             //check if search query is similar to saved search queries
             chrome.storage.sync.get(['search_results'], function(result) {
                 if(result.search_results) {
                     const similarQuery = checkSimilarQueries(result.search_results, searchQuery);
                     if(similarQuery) {
-                        //chrome.browserAction.setBadgeText({text: result.search_results[searchQuery].length, tabId});
-                        chrome.pageAction.setTitle({tabId, title: 'You have similar saved search results!'});
+                        chrome.browserAction.setBadgeText({text: result.search_results[searchQuery].length, tabId});
+                        chrome.browserAction.setTitle({tabId, title: 'You have similar saved search results!'});
                     } else {
-                        //chrome.browserAction.setBadgeText({text: '', tabId});
-                        chrome.pageAction.setTitle({tabId, title: ''});
+                        chrome.browserAction.setBadgeText({text: '', tabId});
+                        chrome.browserAction.setTitle({tabId, title: ''});
                     }
                 } else {
-text: '' ,                    //chrome.browserAction.setBadgeText({text: '', tabId});
-                    chrome.pageAction.setTitle({tabId, title: ''});
+                    chrome.browserAction.setBadgeText({tabId, text: ''});
+                    chrome.browserAction.setTitle({tabId, title: ''});
                 }
             });
             searchTabs[tabId] = searchQuery;
-        }
-    } else {
-        if(chrome.pageAction) {
-            chrome.pageAction.hide(tabId);
         }
     }
 }
