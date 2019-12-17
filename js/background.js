@@ -43,7 +43,7 @@ function checkForSearchQuery(tabId, url) {
                         chrome.pageAction.setTitle({tabId, title: ''});
                     }
                 } else {
-                    //chrome.browserAction.setBadgeText({text: '', tabId});
+text: '' ,                    //chrome.browserAction.setBadgeText({text: '', tabId});
                     chrome.pageAction.setTitle({tabId, title: ''});
                 }
             });
