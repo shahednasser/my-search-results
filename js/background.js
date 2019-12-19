@@ -27,9 +27,12 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
 function checkForSearchQuery(tabId, url) {
     const urlObj = new URL(url)
+    console.log("check")
     if(urlObj.href.indexOf('google.com') !== -1 && urlObj.pathname.indexOf('/search') !== -1) {
+        console.log("cond1");
         const searchQuery = urlObj.searchParams.get('q');
         if(searchQuery) {
+            console.log("cond2");
             //check if search query is similar to saved search queries
             chrome.storage.sync.get(['search_results'], function(result) {
                 if(result.search_results) {
