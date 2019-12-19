@@ -5,7 +5,7 @@ chrome.storage.sync.get(['settings'], function(results) {
         get_notifications = false;
     if(results.settings) {
         show_badge = results.settings.hasOwnProperty('show_badge') ? results.settings.hasOwnProperty('show_badge') : true;
-        results.settings.hasOwnProperty('get_notifications') ? results.settings.hasOwnProperty('get_notifications') : false;
+        get_notifications = results.settings.hasOwnProperty('get_notifications') ? results.settings.hasOwnProperty('get_notifications') : false;
     }
     showBadgeElement.prop('checked', show_badge);
     getNotificationsElement.prop('checked', get_notifications);
