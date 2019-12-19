@@ -16,7 +16,7 @@ $("#saveBtn").on('click', function () {
     const self = this;
     $(self).prop('disabled', true);
     chrome.storage.sync.set({settings}, function () {
-        showAlertSuccess('Settings saved successfully!');
+        showAlertSuccess($(".form"), 'Settings saved successfully!');
         $(self).prop('disabled', false);
     });
 });
