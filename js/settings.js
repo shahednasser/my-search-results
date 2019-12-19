@@ -1,10 +1,14 @@
 const showBadgeElement = $("#show_badge"),
       getNotificationsElement = $("#getNotifications");
 chrome.storage.sync.get(['settings'], function(results) {
+    let show_badge = true,
+        get_notifications = false;
     if(results.settings) {
-        showBadgeElement.prop('checked', results.settings.hasOwnProperty('show_badge') ? results.settings.hasOwnProperty('show_badge') : true);
-        getNotificationsElement.prop('checked', results.settings.hasOwnProperty('get_notifications') ? results.settings.hasOwnProperty('get_notifications') : false);
+        show_badge = results.settings.hasOwnProperty('show_badge') ? results.settings.hasOwnProperty('show_badge') : true;
+        results.settings.hasOwnProperty('get_notifications') ? results.settings.hasOwnProperty('get_notifications') : false;
     }
+    showBadgeElement.prop('checked', show_badge);
+    getNotificationsElement.prop('checked', get_notifications);
 });
 
 $("#saveBtn").on('click', function () {
