@@ -27,7 +27,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
 function checkForSearchQuery(tabId, url) {
     const urlObj = new URL(url)
-    console.log("check")
+    console.log("check", url)
     if(urlObj.href.indexOf('google.com') !== -1 && urlObj.pathname.indexOf('/search') !== -1) {
         console.log("cond1");
         const searchQuery = urlObj.searchParams.get('q');
