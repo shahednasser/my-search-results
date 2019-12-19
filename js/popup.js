@@ -41,7 +41,7 @@ $("#saveSearchResult").on('click', function () {
         }
         search_results[searchQuery].push({title: searchResultTitle, url: searchResult});
         chrome.storage.sync.set({search_results}, function () {
-            formContainer.before('<div class="alert alert-success">Search Result has been saved!</div>');
+            showAlertSuccess(formContainer, 'Search Result has been saved!');
             self.prop('disabled', false);
             window.updateList(searchQuery, true, false);
         });

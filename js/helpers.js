@@ -26,3 +26,7 @@ window.updateList = function (searchQuery, hasLimit, shouldRedirect) {
         }
     });
 }
+
+window.showAlertSuccess = function (formContainer, message) {
+    formContainer.before('<div class="alert alert-success">' + message + '</div>');
+}
