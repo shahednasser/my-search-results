@@ -60,6 +60,7 @@ function checkSimilarQueries(search_results, searchQuery) {
     const keys = Object.keys(search_results);
     for(let i = 0; i < arr.length; i++) {
         for(let j = 0; j < keys.length; j++) {
+            console.log(arr[i], keys[j]);
             if(keys[j].indexOf(arr[i]) !== -1) {
                 return keys[j];
             }
