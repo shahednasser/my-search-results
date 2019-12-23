@@ -1,4 +1,3 @@
-import(chrome.runtime.getURL('js/jquery.min.js'));
 import(chrome.runtime.getURL('js/helpers.js'));
 const searchTabs = {};
 chrome.webRequest.onCompleted.addListener(function (details) {

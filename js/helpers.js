@@ -1,3 +1,4 @@
+import(chrome.runtime.getURL('js/jquery.min.js'));
 const resultsContainer = $("#resultsContainer").length ? $("#resultsContainer") : $("#results"),
       resultsList = resultsContainer.attr('id') === "results" ? resultsContainer : resultsContainer.find('.results');
 window.updateList = function (searchQuery, hasLimit, shouldRedirect) {
