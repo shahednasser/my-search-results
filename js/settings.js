@@ -19,14 +19,10 @@ $("#saveBtn").on('click', function () {
         showAlertSuccess($(".form"), 'Settings saved successfully!');
         $(self).prop('disabled', false);
 
-        if(!show_badge) {
-            //remove any shown badge from tabs
-            chrome.tabs.query({}, function(tabs) {
-                for(let i = 0; i < tabs.length; i++) {
-                    chrome.browserAction.setBadgeText({text: '', tabId: tabs[i].id});
-                    chrome.browserAction.setTitle({tabId: tabs[i].id, title: ''});
-                }
-            });
-        }
+        chrome.tabs.query({}, function(tabs) {
+            for(let i = 0; i < tabs.length; i++) {
+                window.checkForSearchQuery(tabs[i].id, tabs[i].url);
+            }
+        });
     });
 });
