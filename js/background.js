@@ -1,4 +1,4 @@
-import(chrome.runtime.getURL('./helpers'));
+import(chrome.runtime.getURL('js/helpers.js'));
 const searchTabs = {};
 chrome.webRequest.onCompleted.addListener(function (details) {
     const urlObj = new URL(details.url)
