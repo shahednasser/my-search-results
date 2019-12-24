@@ -19,10 +19,6 @@ $("#saveBtn").on('click', function () {
         showAlertSuccess($(".form"), 'Settings saved successfully!');
         $(self).prop('disabled', false);
 
-        chrome.tabs.query({}, function(tabs) {
-            for(let i = 0; i < tabs.length; i++) {
-                window.checkForSearchQuery(tabs[i].id, tabs[i].url);
-            }
-        });
+        chrome.runtime.sendMessage({subject: 'refresh'})
     });
 });

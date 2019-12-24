@@ -1,5 +1,5 @@
 //chrome.storage.sync.clear();
-chrome.runtime.sendMessage({}, function (searchQuery) {
+chrome.runtime.sendMessage({subject: 'getSearchQuery'}, function (searchQuery) {
     if(searchQuery) {
         $("input[name=search_query]").val(searchQuery);
     }

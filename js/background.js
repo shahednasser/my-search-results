@@ -5,10 +5,14 @@ chrome.webRequest.onCompleted.addListener(function (details) {
 }, {urls: ["<all_urls>"]}, []);
 
 chrome.runtime.onMessage.addListener(function (request, sender, callback) {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        callback(searchTabs[tabs[0].id]);
-    });
-    return true;  // Will respond asynchronously.
+    if(request.getSearchQuery) {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            callback(searchTabs[tabs[0].id]);
+        });
+        return true;  // Will respond asynchronously.
+    } else if(request.refresh) {
+        refresh();
+    }
 });
 
 chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
@@ -18,12 +22,16 @@ chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
 });
 
 chrome.runtime.onInstalled.addListener(function (details) {
+    refresh();
+});
+
+function refresh() {
     chrome.tabs.query({}, function(tabs) {
         for(let i = 0; i < tabs.length; i++) {
             checkForSearchQuery(tabs[i].id, tabs[i].url);
         }
     });
-});
+}
 
 function checkForSearchQuery (tabId, url) {
     const urlObj = new URL(url)
