@@ -6,7 +6,8 @@
          "storage",
          "tabs",
          "webRequest",
-         "*://*.google.com/*"
+         "*://*.google.com/*",
+         "notifications"
  ],
  "browser_action": {
      "default_icon": {                    
