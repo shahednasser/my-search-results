@@ -29,23 +29,6 @@ chrome.runtime.onInstalled.addListener(function (details) {
     refresh();
 });
 
-chrome.notifications.onClicked.addListener(function (notificationId) {
-    if(notifications.hasOwnProperty(notificationId)) {
-        checkForSearchQuery(notifications[notificationId].tabId, notifications[notificationId].url);
-    }
-});
-
-chrome.tabs.onActivated.addListener(function (activeInfo) {
-    for(let key in notifications) {
-        if(notifications.hasOwnProperty(key)) {
-            if(value.tabId !== activeInfo.tabId) {
-                chrome.notifications.clear(key);
-            }
-        }
-    }
-    notifications = {};
-});
-
 function refresh() {
     chrome.tabs.query({}, function(tabs) {
         for(let i = 0; i < tabs.length; i++) {
@@ -68,17 +51,6 @@ function checkForSearchQuery (tabId, url) {
                             chrome.browserAction.setBadgeText({text: result.search_results[similarQuery].length.toString(), tabId});
                         } else {
                             chrome.browserAction.setBadgeText({text: '', tabId});
-                        }
-                        if(result.settings && result.settings.get_notifications) {
-                            chrome.notifications.getPermissionLevel(function (level) {
-                                if(level === "granted") {
-                                    chrome.notifications.create({type: 'basic', iconUrl: chrome.runtime.getURL('images/logo.png'),
-                                        title: 'Saved Search Result Found!', message: 'Click heere to view previously saved search results ' + 
-                                    'of a previously saved similar query'}, function(notificationId) {
-                                        notifications[notificationId] = {tabId, url};
-                                    });
-                                }
-                            });
                         }
                         chrome.browserAction.setTitle({tabId, title: 'You have similar saved search results!'});
                     } else {
