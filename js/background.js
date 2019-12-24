@@ -5,14 +5,16 @@ chrome.webRequest.onCompleted.addListener(function (details) {
 }, {urls: ["<all_urls>"]}, []);
 
 chrome.runtime.onMessage.addListener(function (request, sender, callback) {
-    console.log("request", request);
-    if(request.getSearchQuery) {
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            callback(searchTabs[tabs[0].id]);
-        });
-        return true;  // Will respond asynchronously.
-    } else if(request.refresh) {
-        refresh();
+    let subject = request.subject;
+    switch (subject) {
+        case 'getSearchQuery':
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                callback(searchTabs[tabs[0].id]);
+            });
+            return true;  // Will respond asynchronously.
+        case 'refresh':
+            refresh();
+            break;
     }
 });
 
