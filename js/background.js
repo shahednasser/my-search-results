@@ -48,6 +48,8 @@ function checkForSearchQuery (tabId, url) {
                     if(similarQuery) {
                         if(!result.settings || result.settings.show_badge) {
                             chrome.browserAction.setBadgeText({text: result.search_results[similarQuery].length.toString(), tabId});
+                        } else {
+                            chrome.browserAction.setBadgeText({text: '', tabId});
                         }
                         chrome.browserAction.setTitle({tabId, title: 'You have similar saved search results!'});
                     } else {
